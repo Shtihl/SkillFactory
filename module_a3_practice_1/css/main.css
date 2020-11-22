@@ -35,9 +35,51 @@
 
 .page {
     margin: 0;
+    padding: 0;
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #F6F2F2;
+    box-sizing: border-box;
+}
+
+.header {
+    width: 100%;
+    min-height: 89px;
+    max-width: 1249px;
+    margin: 29px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    background-color: #000000;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    min-height: 89px;
+    display: flex;
+    list-style-type: none;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+.menu__item {
+    margin: 0;
+    padding: 32px;
+}
+
+.menu__item:hover {
+    background-color: #FF3F40;
+}
+
+.menu__link {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    color: #E0E0E0;
 }
 
