@@ -64,6 +64,9 @@
     flex-wrap: wrap;
     align-items: stretch;
     list-style: none;
+}
+
+.header__menu {
     padding: 0;
     margin: 0;	
     margin-left: -20px;
@@ -880,5 +883,21 @@ h3 {
 @media screen and (max-width: 400px) {
     .subscribe__form {
         flex-wrap: wrap;
+    }
+    .intro__heading {
+        font-size: 40px;
+    }
+    .intro__heading_style {
+        letter-spacing: 2px;       
+    }
+    .menu {
+        width: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 30px;
     }
 }
