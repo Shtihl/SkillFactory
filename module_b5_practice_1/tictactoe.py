@@ -23,7 +23,7 @@ def game():
         play_field[coord_x][coord_y] = marker
 
         if is_win(play_field, marker):
-            print(f"Player{marker} win")
+            print(f"Игрок{marker} Выиграл!\nПоздравляем!")
             show_field(play_field)
             break
         else:
@@ -37,19 +37,19 @@ def show_field(field):
 
 def users_input(field, marker):
     while True:
-        place = input(f"Input coordinates for mark{marker}: ").split()
+        place = input(f"Введите координаты для{marker}: ").split()
         if len(place) != 2:
-            print("Input two coordinates")
+            print("Введите 2 координаты")
             continue
         if not (place[0].isdigit() and place[1].isdigit()):
-            print("Input numbers")
+            print("Введите числа")
             continue
         coord_x, coord_y = map(int, place)
         if not (coord_x > 0 and coord_x < 4 and coord_y > 0 and coord_y < 4):
-            print("Out of indexes")
+            print("Вышли за рамки поля")
             continue
         if field[coord_x][coord_y] != " - ":
-            print("Cell not empty")
+            print("Клетка занята")
             continue
         break
     return coord_x, coord_y
