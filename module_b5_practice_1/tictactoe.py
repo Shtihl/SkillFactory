@@ -6,58 +6,71 @@ def game():
         [" 3 ", " - ", " - ", " - "],
     ]
 
-    draw_field(play_field)
-    mark = "X"
-    make_turn()
-    switch_mark(mark)
-    print(mark)
+    show_field(play_field)
+
+    turn_count = 0
+
+    for turn_count in range(10):
+        if turn_count == 9:
+            print("Ничья!")
+            break
+        if turn_count % 2 == 0:
+            marker = " X "
+        else:
+            marker = " Y "
+
+        coord_x, coord_y = users_input(play_field, marker)
+        play_field[coord_x][coord_y] = marker
+
+        if is_win(play_field, marker):
+            print(f"Player{marker} win")
+            show_field(play_field)
+            break
+        else:
+            show_field(play_field)
 
 
-def switch_mark(mark):
-    possible_mark = ["X", "O"]
-    if mark == possible_mark[0]:
-        mark = possible_mark[1]
-        return mark
-    if mark == possible_mark[1]:
-        mark = possible_mark[0]
-        return mark
-
-
-def make_turn():
-    point = list(input("введите координаты через пробел").split())
-
-
-def draw_field(field):
+def show_field(field):
     for row in field:
         print("".join([str(elem) for elem in row]))
 
 
-def is_win(field):
-    win_patterns = [
-        [field[1][1], field[1][2], field[1][3]],
-        [field[2][1], field[2][2], field[2][3]],
-        [field[3][1], field[3][2], field[3][3]],
-        [field[1][1], field[2][1], field[3][1]],
-        [field[1][2], field[2][2], field[3][2]],
-        [field[1][3], field[2][3], field[3][3]],
-        [field[1][1], field[2][2], field[3][3]],
-        [field[3][1], field[2][2], field[1][3]],
-    ]
+def users_input(field, marker):
+    while True:
+        place = input(f"Input coordinates for mark{marker}: ").split()
+        if len(place) != 2:
+            print("Input two coordinates")
+            continue
+        if not (place[0].isdigit() and place[1].isdigit()):
+            print("Input numbers")
+            continue
+        coord_x, coord_y = map(int, place)
+        if not (coord_x > 0 and coord_x < 4 and coord_y > 0 and coord_y < 4):
+            print("Out of indexes")
+            continue
+        if field[coord_x][coord_y] != " - ":
+            print("Cell not empty")
+            continue
+        break
+    return coord_x, coord_y
+
+
+def is_win(field, marker):
+    def check_line(item_1, item_2, item_3, marker):
+        if item_1 == item_2 == item_3 == marker:
+            return True
+        return False
+
+    for _ in range(1, 4):
+        if (
+            check_line(field[_][1], field[_][2], field[_][3], marker)
+            or check_line(field[1][_], field[2][_], field[3][_], marker)
+            or check_line(field[1][1], field[2][2], field[3][3], marker)
+            or check_line(field[3][1], field[2][2], field[1][3], marker)
+        ):
+            return True
+    return False
 
 
 if __name__ == "__main__":
     game()
-
-
-# Запускаем функцию game()
-# В game инициализируем поле через draw_field
-# Задаём стартовый маркер
-# Ждём хода игрока через make_turn
-
-# draw_field - построчно выводим игровое поле
-
-# make_turn - на входе принимаем маркер и поле
-# получаем координаты, проверяем что корректные
-# модифицируем поле, перерисовываем
-
-# is_win ловим на вход поле, проверяем есть ли попадение в победный паттерн
