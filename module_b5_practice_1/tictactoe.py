@@ -17,11 +17,11 @@ def game():
         coord_x, coord_y = users_input(play_field, marker)
         play_field[coord_x][coord_y] = marker
 
+        show_field(play_field)
+        
         if is_win(play_field, marker):
             print(f"Игрок{marker}Выиграл!\nПоздравляем!")
             break
-
-        show_field(play_field)
 
 
 def show_field(field):
