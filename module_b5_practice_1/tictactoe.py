@@ -35,6 +35,7 @@ def users_input(field, marker):
         if len(place) != 2:
             print("Введите 2 координаты")
             continue
+
         try:
             coord_x, coord_y = int(place[0]), int(place[1])
         except ValueError:
@@ -44,10 +45,13 @@ def users_input(field, marker):
         if not (coord_x > 0 and coord_x < 4 and coord_y > 0 and coord_y < 4):
             print("Вышли за рамки поля")
             continue
+
         if field[coord_x][coord_y] != " - ":
             print("Клетка занята")
             continue
+
         break
+        
     return coord_x, coord_y
 
 
