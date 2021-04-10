@@ -1,3 +1,18 @@
+# 1. Суть написанного приложения - игра "Крестики Нолики".
+# 2. Игровое поле представляет собой поле 3х3.
+#   | 1 | 2 | 3 |
+
+# 1 | О | О | О |
+
+# 2 | О | О | О |
+
+# 3 | О | О | О |
+
+# 3. Игроки поочередно делают ходы.
+# 4. При попытке указать точку за пределами поля, уже занятую, и при прочих исключениях предложить повторить ход.
+# 5. Игра заканчивается победой одного из игроков или в случае ничьей.
+
+
 def game():
     play_field = [
         ["   ", " 1 ", " 2 ", " 3 "],
@@ -13,12 +28,12 @@ def game():
             print("Ничья!")
             break
         marker = " X " if turn_count % 2 == 0 else " Y "
-        
+
         coord_x, coord_y = users_input(play_field, marker)
         play_field[coord_x][coord_y] = marker
 
         show_field(play_field)
-        
+
         if is_win(play_field, marker):
             print(f"Игрок{marker}Выиграл!\nПоздравляем!")
             break
@@ -51,7 +66,7 @@ def users_input(field, marker):
             continue
 
         break
-        
+
     return coord_x, coord_y
 
 
@@ -61,16 +76,14 @@ def is_win(field, marker):
             return True
         return False
 
-    if (
-        check_line(field[1][1], field[2][2], field[3][3], marker)
-        or check_line(field[3][1], field[2][2], field[1][3], marker)
+    if check_line(field[1][1], field[2][2], field[3][3], marker) or check_line(
+        field[3][1], field[2][2], field[1][3], marker
     ):
         return True
 
     for _ in range(1, 4):
-        if (
-            check_line(field[_][1], field[_][2], field[_][3], marker)
-            or check_line(field[1][_], field[2][_], field[3][_], marker)
+        if check_line(field[_][1], field[_][2], field[_][3], marker) or check_line(
+            field[1][_], field[2][_], field[3][_], marker
         ):
             return True
     return False
