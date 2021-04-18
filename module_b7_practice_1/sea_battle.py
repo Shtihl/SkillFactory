@@ -108,15 +108,24 @@ class Game:
         print(" x - номер строки  ")
         print(" y - номер столбца ")
 
+    def draw_board(self, user_board, ai_board):
+        print("-" * 60)
+        print("Доска пользователя:" + " " * 11 + "|" + "Доска компьютера:")
+        for _ in range(user_board.size):
+            print(user_board[_] + " | " + ai_board[_])
+
     def loop(self):
         num = 0
         while True:
-            print("-" * 20)
-            print("Доска пользователя:")
-            print(self.us.board)
-            print("-" * 20)
-            print("Доска компьютера:")
-            print(self.ai.board)
+            self.draw_board(self.us.board, self.ai.board)
+            # print("-" * 20)
+            # print("Доска пользователя:")
+            # print(type(self.us.board))
+            # print(self.us.board)
+            # print("-" * 20)
+            # print("Доска компьютера:")
+            # print(type(self.ai.board))
+            # print(self.ai.board)
             if num % 2 == 0:
                 print("-" * 20)
                 print("Ходит пользователь!")
